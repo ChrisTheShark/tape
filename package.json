@@ -2,13 +2,22 @@
   "name": "tape",
   "version": "0.0.1",
   "description": "Server composer for Express.js.",
+  "repository": "https://github.com/ChrisTheShark/tape",
+  "author": "Chris Dyer",
+  "license": "MIT",
   "main": "lib/index.js",
   "scripts": {
     "test": "./node_modules/mocha/bin/mocha"
   },
-  "repository": "https://github.com/ChrisTheShark/tape",
-  "author": "Chris Dyer",
-  "license": "MIT",
+  "keywords": [
+    "express",
+    "server",
+    "composer",
+    "manifest"
+  ],
+  "engines": {
+    "node": ">=4.0"
+  },
   "dependencies": {
     "async": "^2.1.4",
     "express": "^4.14.0",
