@@ -1,0 +1,23 @@
+{
+  "name": "tape",
+  "version": "0.0.1",
+  "description": "Server composer for expressjs.",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "./node_modules/mocha/bin/mocha"
+  },
+  "repository": "https://github.com/ChrisTheShark/tape",
+  "author": "Chris Dyer",
+  "license": "MIT",
+  "dependencies": {
+    "async": "^2.1.4",
+    "express": "^4.14.0",
+    "joi": "^10.0.1"
+  },
+  "devDependencies": {
+    "body-parser": "^1.15.2",
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0",
+    "morgan": "^1.7.0"
+  }
+}
