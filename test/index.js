@@ -149,7 +149,7 @@ describe('compose', function() {
         Tape.compose(manifest, function(error, app) {
             expect(error).to.be.null;
             let routeStack = app._router.stack;
-            expect(routeStack[2].name).to.equal('<anonymous>');
+            expect(routeStack[2].name).to.not.be.null;
             done();
         });
     });
