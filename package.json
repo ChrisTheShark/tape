@@ -1,5 +1,5 @@
 {
-  "name": "tape",
+  "name": "@chris.dyer/tape",
   "version": "0.0.1",
   "description": "Server composer for Express.js.",
   "repository": "https://github.com/ChrisTheShark/tape",
@@ -13,7 +13,8 @@
     "express",
     "server",
     "composer",
-    "manifest"
+    "manifest",
+    "tape"
   ],
   "engines": {
     "node": ">=4.0"
