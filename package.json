@@ -1,6 +1,6 @@
 {
   "name": "@chris.dyer/tape",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Server composer for Express.js.",
   "repository": "https://github.com/ChrisTheShark/tape",
   "author": "Chris Dyer",
