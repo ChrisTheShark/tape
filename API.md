@@ -47,7 +47,7 @@ const manifest = {
             args: ['combined']
         }],
         routers: [{
-            router: './simpleRoute',
+            router: './lib/routes/simpleRoute',
             middleware: [{
                 customFunction: function(req, res, next) {
                     next();
