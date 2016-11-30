@@ -6,7 +6,7 @@ Lead Maintainer - [Chris Dyer](https://github.com/ChrisTheShark)
 
 ### A server composer for Express.
 
-Tape provides configuration based composition of Express's applcation object. Specifically it wraps
+Tape provides configuration based composition of Express's application object. Specifically it wraps
 
  * an application creation via `app = require('express')()`
  * one or more `router = require('express').Router()` registrations
