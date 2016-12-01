@@ -12,11 +12,14 @@ Composes an express application where:
     + `views` - an object containing view settings for the application. View path and engine are set here.
     + `middleware` - an array of middleware objects to pass to the application. Middleware can be a module with a constructor and arguments; a module, a function and arguments; or a custom function.
     + `routes` - an array of route objects to pass to the application. These routes are parsed and provided to the appropriate [app.<method>(path, callback [, callback ...])] (http://expressjs.com/en/4x/api.html#app.get) function.
-  * `routers` - an array of routers to register with the application. The path is relative to the options.relativeTo parameter.
-    + `router` - relative path to router file.
-    + `middleware` - an array of middleware objects to pass to the router. Syntax matches the application middleware above.
-    + `options` - an object containing optional parameters for the router.
-      * `path` - a string denoting a path to append to any requests to the router object.
+      * `method` - the method for the route, aligns with the available application methods located [here] (http://expressjs.com/en/4x/api.html#routing-methods). Currently, not performing strict validation on the method name.
+      * `path` - The path for which the middleware function is invoked. Currently, only supporting path and path patterns.
+      * `handlers` - An array of callback functions.
+    + `routers` - an array of routers to register with the application. The path is relative to the options.relativeTo parameter.
+      * `router` - relative path to router file.
+      * `middleware` - an array of middleware objects to pass to the router. Syntax matches the application middleware above.
+      * `options` - an object containing optional parameters for the router.
+        + `path` - a string denoting a path to append to any requests to the router object.
 
 If no `callback` is provided, a `Promise` object is returned where the value passed to the Promise resolve handler is the `app` object and the value passed to the Promise reject handler is the error response if a failure occurred.
 
