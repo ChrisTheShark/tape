@@ -255,6 +255,29 @@ describe('compose', function() {
         });
     });
 
+    it('should register a route when provided ignoring case', function(done) {
+        let manifest = {
+            application: {
+                routes: [{
+                    method: 'GET',
+                    path: '/address',
+                    handlers: [function(req, res) {
+                        res.json({
+                            success: 'Super!'
+                        });
+                    }]
+                }]
+            }
+        };
+
+        Tape.compose(manifest, function(error, app) {
+            expect(error).to.be.null;
+            let routeStack = app._router.stack;
+            expect(routeStack[2].regexp).to.deep.equal(/^\/address\/?$/i);
+            done();
+        });
+    });
+
     it('should register a route with multiple handlers when provided', function(done) {
         let manifest = {
             application: {
