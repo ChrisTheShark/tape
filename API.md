@@ -9,7 +9,7 @@ Composes an express application where:
 + `manifest` - an object having:
   * `application` - an object containing the configuration passed to [app.use(...)] (http://expressjs.com/en/4x/api.html#app)  or [app.set(..., ...)] (http://expressjs.com/en/4x/api.html#app)
     + `locals` - an object containing properties that are local variables within the application.
-    + `views` - an object containing view settings for the application. View path and engine are set here.
+    + `views` - an object containing view settings for the application. View path and engine are set here. The path is relative to the options.relativeTo parameter.
     + `middleware` - an array of middleware objects to pass to the application. Middleware can be a module with a constructor and arguments; a module, a function and arguments; or a custom function.
     + `routes` - an array of route objects to pass to the application. These routes are parsed and provided to the appropriate [app.method(path, callback [, callback ...])] (http://expressjs.com/en/4x/api.html#app.get) function.
       * `method` - the method for the route, aligns with the available application methods located [here] (http://expressjs.com/en/4x/api.html#routing-methods). Currently, not performing strict validation on the method name.
