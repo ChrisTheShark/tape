@@ -3,6 +3,13 @@ const expect = require('chai').expect,
     Tape = require('../lib/index.js');
 
 describe('compose', function() {
+
+    /*
+     * =========================================================================
+     * Negative path test cases.
+     * =========================================================================
+     */
+
     it('should notify user if manifest is invalid', function(done) {
         let manifest = {
             blah: {
@@ -45,6 +52,77 @@ describe('compose', function() {
             done();
         }
     });
+
+    it('should fail validation if route method is missing.', function(done) {
+        let manifest = {
+            application: {
+                routes: [{
+                    path: '/address',
+                    handlers: [function(req, res) {
+                        res.json({
+                            success: 'Super!'
+                        });
+                    }]
+                }]
+            }
+        };
+
+        try {
+            Tape.compose(manifest, {}, function(error, app) {});
+        } catch (error) {
+            expect(error).to.not.be.null;
+            expect(error.name).to.equal('ValidationError');
+            done();
+        }
+    });
+
+    it('should fail validation if route path is missing.', function(done) {
+        let manifest = {
+            application: {
+                routes: [{
+                    method: 'get',
+                    handlers: [function(req, res) {
+                        res.json({
+                            success: 'Super!'
+                        });
+                    }]
+                }]
+            }
+        };
+
+        try {
+            Tape.compose(manifest, {}, function(error, app) {});
+        } catch (error) {
+            expect(error).to.not.be.null;
+            expect(error.name).to.equal('ValidationError');
+            done();
+        }
+    });
+
+    it('should fail validation if route handler array is missing.', function(done) {
+        let manifest = {
+            application: {
+                routes: [{
+                    method: 'get',
+                    path: '/address'
+                }]
+            }
+        };
+
+        try {
+            Tape.compose(manifest, {}, function(error, app) {});
+        } catch (error) {
+            expect(error).to.not.be.null;
+            expect(error.name).to.equal('ValidationError');
+            done();
+        }
+    });
+
+    /*
+     * =========================================================================
+     * Happy path test cases.
+     * =========================================================================
+     */
 
     it('should set application local variable when provided', function(done) {
         let manifest = {
@@ -150,6 +228,59 @@ describe('compose', function() {
             expect(error).to.be.null;
             let routeStack = app._router.stack;
             expect(routeStack[2].name).to.not.be.null;
+            done();
+        });
+    });
+
+    it('should register a route when provided', function(done) {
+        let manifest = {
+            application: {
+                routes: [{
+                    method: 'get',
+                    path: '/address',
+                    handlers: [function(req, res) {
+                        res.json({
+                            success: 'Super!'
+                        });
+                    }]
+                }]
+            }
+        };
+
+        Tape.compose(manifest, function(error, app) {
+            expect(error).to.be.null;
+            let routeStack = app._router.stack;
+            expect(routeStack[2].regexp).to.deep.equal(/^\/address\/?$/i);
+            done();
+        });
+    });
+
+    it('should register a route with multiple handlers when provided', function(done) {
+        let manifest = {
+            application: {
+                routes: [{
+                    method: 'get',
+                    path: '/address',
+                    handlers: [
+                        function(req, res, next) {
+                            console.log('Your about to be praised.');
+                            next();
+                        },
+                        function(req, res) {
+                            res.json({
+                                success: 'Super!'
+                            });
+                        }
+                    ]
+                }]
+            }
+        };
+
+        Tape.compose(manifest, function(error, app) {
+            expect(error).to.be.null;
+            let routeStack = app._router.stack;
+            expect(routeStack[2].regexp).to.deep.equal(/^\/address\/?$/i);
+            expect(routeStack[2].route.stack.length).to.equal(2);
             done();
         });
     });
